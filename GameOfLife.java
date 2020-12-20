@@ -42,24 +42,24 @@ public class GameOfLife {
     }
 
     public void simulate() {
-        char[][] oldGrid = copyGrid(grid);
+        char[][] oldGrid = copy(grid);
         for (int rowIndex = 0; rowIndex < grid.length; rowIndex++) {
             for (int columnIndex = 0; columnIndex < grid[rowIndex].length; columnIndex++) {
                 char[] neighbours = getNeighbours(oldGrid, new Coord2D(columnIndex, rowIndex));
                 char cell = oldGrid[rowIndex][columnIndex];
-                grid[rowIndex][columnIndex] = processNeighbours(neighbours, cell);
+                grid[rowIndex][columnIndex] = process(neighbours, cell);
             }
         }
     }
 
-    public char[][] copyGrid(char[][] grid) {
+    public char[][] copy(char[][] grid) {
         char[][] copy = new char[grid.length][grid[0].length];
         for (int rowIndex = 0; rowIndex < grid.length; rowIndex++)
             copy[rowIndex] = grid[rowIndex].clone();
         return copy;
     }
 
-    public char processNeighbours(char[] cells, char cell) {
+    public char process(char[] cells, char cell) {
         long livingCounter = 0l;
         for (char c: cells) if (c == 'x') livingCounter++;
         
